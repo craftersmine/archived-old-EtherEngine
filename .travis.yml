@@ -5,4 +5,4 @@ install:
 mono:
   - latest
 script:
-  - xbuild craftersmine.EtherEngine.sln
+  - msbuild /p:Configuration=Release craftersmine.EtherEngine.sln
