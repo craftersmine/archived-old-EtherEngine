@@ -47,6 +47,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\craftersmine.EtherEngine.Content\craftersmine.EtherEngine.Content.csproj">
+      <Project>{45e14932-e679-4cf6-9408-73f610bffebe}</Project>
+      <Name>craftersmine.EtherEngine.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\craftersmine.EtherEngine.Core\craftersmine.EtherEngine.Core.csproj">
+      <Project>{eeadd796-85e3-4695-907b-72b1fde90c58}</Project>
+      <Name>craftersmine.EtherEngine.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\craftersmine.EtherEngine.Utils\craftersmine.EtherEngine.Utils.csproj">
       <Project>{18CD7A59-F7EE-45AD-92DE-8EDDC2114833}</Project>
       <Name>craftersmine.EtherEngine.Utils</Name>
