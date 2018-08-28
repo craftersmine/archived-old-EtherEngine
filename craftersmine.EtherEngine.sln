@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Global", "_Global", "{3C72
 		_Global\GlobalAssemblyInfo.cs = _Global\GlobalAssemblyInfo.cs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{624835AA-B689-460A-BA3B-B270040351A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApps", "TestApps", "{4AA4450F-50D1-4964-AD52-E561649405CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEADD796-85E3-4695-907B-72B1FDE90C58} = {624835AA-B689-460A-BA3B-B270040351A5}
+		{48FA1E38-0E43-4A84-B3CA-32238FF25614} = {624835AA-B689-460A-BA3B-B270040351A5}
+		{18CD7A59-F7EE-45AD-92DE-8EDDC2114833} = {624835AA-B689-460A-BA3B-B270040351A5}
+		{A44CD534-7C91-4EF6-AC23-A03A84284EA3} = {4AA4450F-50D1-4964-AD52-E561649405CA}
+		{45E14932-E679-4CF6-9408-73F610BFFEBE} = {624835AA-B689-460A-BA3B-B270040351A5}
+		{EB866C13-3350-4AAE-BABA-42B69156F57D} = {624835AA-B689-460A-BA3B-B270040351A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D653C5C-5DBA-4A2A-9A2E-9CBD46DC71EC}
