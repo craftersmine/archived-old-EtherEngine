@@ -1,0 +1,6 @@
+language: c#
+solution: craftersmine.EtherEngine.sln
+install:
+  - sudo apt-get install libmono-system-windows-forms4.0-cil
+mono:
+  - latest
