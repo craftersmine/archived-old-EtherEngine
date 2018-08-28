@@ -4,5 +4,3 @@ install:
   - sudo apt-get install libmono-system-windows-forms4.0-cil
 mono:
   - latest
-script:
-  - msbuild /p:Configuration=Release craftersmine.EtherEngine.sln
