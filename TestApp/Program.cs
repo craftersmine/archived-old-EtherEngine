@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using craftersmine.EtherEngine.Content;
 using craftersmine.EtherEngine.Core;
 using craftersmine.EtherEngine.Input;
+using craftersmine.EtherEngine.Objects;
 using craftersmine.EtherEngine.Utils;
 
 namespace TestApp
@@ -97,7 +98,11 @@ namespace TestApp
             scene1.AddGameObject(testGameObj1);
             scene1.AddGameObject(cameraBinded);
             TestUIControl control = new TestUIControl();
+            Texture buttonTex = new Texture(Image.FromFile(@"D:\Родион\fankit\TestButtonTexture.png"), TextureLayout.Stretch);
+            UIButton button = new UIButton(100, 32, buttonTex, 32);
             scene1.AddUIControl(control);
+            button.Transform.Place(100, 100);
+            scene1.AddUIControl(button);
             //cameraBinded.IsCameraSticked = true;
             audioChannel.ChannelVolume = 0.1f;
             audioChannel.Play();
