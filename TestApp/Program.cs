@@ -97,6 +97,8 @@ namespace TestApp
             scene1.AddGameObject(testGameObj);
             scene1.AddGameObject(testGameObj1);
             scene1.AddGameObject(cameraBinded);
+            TestObj tobj = new TestObj(cameraBinded);
+            scene1.AddGameObject(tobj);
             TestUIControl control = new TestUIControl();
             Texture buttonTex = new Texture(Image.FromFile(@"D:\Родион\fankit\TestButtonTexture.png"), TextureLayout.Stretch);
             UIButton button = new UIButton(100, 32, buttonTex, 32);
@@ -117,6 +119,27 @@ namespace TestApp
             Vector2 moveCamVec = new Vector2((int)(objInitialSpeed * sticks.LeftStickAxisX * -1), (int)(objInitialSpeed * sticks.LeftStickAxisY));
             cameraBinded.Transform.Move(moveVec);
             scene1.Camera.MoveCamera(moveCamVec);
+        }
+    }
+
+    public class TestObj : GameObject
+    {
+        private GameObject collidableObj;
+
+        public TestObj(GameObject collidable)
+        {
+            collidableObj = collidable;
+            Texture texture = new Texture(Image.FromFile(@"D:\Родион\VS\MyGame2\resources\raw\maps\textures\overworld_base_river.png"), TextureLayout.Default);
+            this.SetTexture(texture);
+            this.Transform.SetSize(32, 32);
+            this.CollisionBox.SetCollisionBox(0, 0, 32, 32);
+        }
+
+        public override void OnCollision(GameObject gameObject)
+        {
+            base.OnCollision(gameObject);
+            if (gameObject == collidableObj)
+                GameApplication.Log(LogEntryType.Info, "Collided with object");
         }
     }
 }
