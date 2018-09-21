@@ -9,6 +9,9 @@ using NAudio.Wave;
 
 namespace craftersmine.EtherEngine.Core
 {
+    /// <summary>
+    /// Represents playable audio channel. This class cannot be inherited
+	/// </summary>
     public sealed class AudioChannel
     {
         private float chlVolume;
@@ -16,7 +19,14 @@ namespace craftersmine.EtherEngine.Core
         private WaveOut waveOut { get; set; }
         private LoopStream loopStream { get; set; }
 
-        public Audio Audio { get; set; }
+        /// <summary>
+        /// Gets playable audio
+        /// </summary>
+        public Audio Audio { get; internal set; }
+        
+        /// <summary>
+        /// Gets audio channel name
+        /// </summary>
         public string ChannelName { get; internal set; }
         /// <summary>
         /// Gets or sets channel sound volume
@@ -35,12 +45,30 @@ namespace craftersmine.EtherEngine.Core
         /// </summary>
         public bool IsRepeating { get { return loopStream.EnableLooping; } set { loopStream.EnableLooping = value; } }
 
+        /// <summary>
+        /// Creates new <see cref="AudioChannel"/> instance
+        /// </summary>
+        /// <param name="name">Audio channel name</param>
+        /// <param name="audio">Audio data</param>
         public AudioChannel(string name, Audio audio)
         {
             Audio = audio;
             ChannelName = name;
             waveOut = new WaveOut();
             loopStream = new LoopStream(Audio.GetWaveFile());
+            waveOut.Init(loopStream);
+        }
+        
+        /// <summary>
+        /// Replaces current audio data with another
+        /// </summary>
+        /// <param name="audio">New audio data</param>
+        public void SetAudio(Audio audio)
+        {
+            this.Stop();
+            Audio = audio;
+            loopStream = new LoopStream(Audio.GetWaveFile());
+            waveOut = new WaveOut();
             waveOut.Init(loopStream);
         }
 

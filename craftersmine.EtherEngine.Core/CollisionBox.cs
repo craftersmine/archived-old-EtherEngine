@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace craftersmine.EtherEngine.Utils
 {
+    /// <summary>
+    /// Represents collision box. This class cannot be inherited
+    /// </summary>
     public sealed class CollisionBox
     {
+        /// <summary>
+        /// Gets collision box offset from object origin by X axis
+        /// </summary>
         public int XOffset { get; internal set; }
         public int YOffset { get; internal set; }
         public int Height { get; internal set; }
