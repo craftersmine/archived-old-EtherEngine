@@ -43,6 +43,15 @@ namespace craftersmine.EtherEngine.Content
             TextureImage = textureImage;
             TextureLayout = textureLayout;
         }
+
+			 public static Texture FromFile(string filepath, TextureLayout textureLayout)
+			 {
+            if (filepath == null)
+                throw new ArgumentNullException(nameof(filepath));
+            Image texImg = Image.FromFile(filepath);
+            Texture texture = new Texture(texImg, textureLayout);
+            return texture;
+			 }
     }
 
     /// <summary>
