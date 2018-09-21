@@ -17,6 +17,9 @@ namespace craftersmine.EtherEngine.Core
         private static int PhysicsUpdates { get; set; }
         private static int TPSLast { get; set; }
         private static int UPSLast { get; set; }
+
+        internal static bool IsLogViewerVisible { get; set; }
+
         public static int TPS { get; set; }
         public static int UPS { get; set; }
 
@@ -49,12 +52,21 @@ namespace craftersmine.EtherEngine.Core
 
         private void GameTickUpdaterMethod(object state)
         {
+            // Shift + Ctrl + F10 => Draws debug info
             if (Keyboard.IsKeyDown(System.Windows.Forms.Keys.ControlKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.ShiftKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.F10))
                 GameApplication.Renderer.DrawDebugInfo = true;
             else GameApplication.Renderer.DrawDebugInfo = false;
+
+            // Shift + Ctrl + F11 => Draws debug rectangles
             if (Keyboard.IsKeyDown(System.Windows.Forms.Keys.ControlKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.ShiftKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.F11))
                 GameApplication.Renderer.DrawDebugRects = true;
             else GameApplication.Renderer.DrawDebugRects = false;
+
+            // Shift + Ctrl + F12 => Shows log viewer
+            if (Keyboard.IsKeyDown(System.Windows.Forms.Keys.ControlKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.ShiftKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.F12) && !IsLogViewerVisible)
+                ShowLogViewer();
+
+            
             GameApplication.GameWindow.OnUpdate();
             if (GameApplication.GameWindow.CurrentScene != null)
             {
@@ -66,6 +78,15 @@ namespace craftersmine.EtherEngine.Core
                 }
             }
             Ticks++;
+        }
+
+        private void ShowLogViewer()
+        {
+            if (!IsLogViewerVisible)
+            {
+                GameApplication.LogViewer?.Show();
+                IsLogViewerVisible = true;
+            }
         }
     }
 }
