@@ -20,6 +20,7 @@ namespace craftersmine.EtherEngine.Core
         internal static Renderer Renderer { get; set; }
         internal static GameUpdater GameUpdater { get; set; }
         internal static WindowSize GameWindowSize { get; set; }
+        internal static GameEngineLogViewer LogViewer { get; set; }
 
         public static void Run(GameWindow gameWindow, string appDataPath)
         {
