@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using craftersmine.EtherEngine.Content;
 using craftersmine.EtherEngine.Core;
+using craftersmine.EtherEngine.Core.Math;
 using craftersmine.EtherEngine.Input;
 using craftersmine.EtherEngine.Objects;
 using craftersmine.EtherEngine.Utils;
@@ -108,6 +109,27 @@ namespace TestApp
             //cameraBinded.IsCameraSticked = true;
             audioChannel.ChannelVolume = 0.1f;
             audioChannel.Play();
+            double[,] perlinData = new double[16, 16];
+            int xArr = 0, yArr = 0;
+            for (double x = 0; x < 1.0d; x += 0.0625d)
+            {
+                for (double y = 0; y < 1.0d; y += 0.0625d)
+                {
+                    perlinData[xArr, yArr] = PerlinNoise.GetNoiseData(x, y, 0);
+                    yArr++;
+                }
+                xArr++;
+                yArr = 0;
+            }
+            for (int x = 0; x < 16; x++)
+            {
+                string arrCtor = "";
+                for (int y = 0; y < 16; y++)
+                {
+                    arrCtor += Math.Round(perlinData[x, y], 2) + " ";
+                }
+                GameApplication.Log(LogEntryType.Info, arrCtor);
+            }
         }
 
         public int objInitialSpeed = 5;
