@@ -44,14 +44,27 @@ namespace craftersmine.EtherEngine.Content
             TextureLayout = textureLayout;
         }
 
-			 public static Texture FromFile(string filepath, TextureLayout textureLayout)
-			 {
-            if (filepath == null)
-                throw new ArgumentNullException(nameof(filepath));
-            Image texImg = Image.FromFile(filepath);
-            Texture texture = new Texture(texImg, textureLayout);
-            return texture;
-			 }
+        /// <summary>
+        /// Loads texture from file with specified texture layout
+        /// </summary>
+        /// <param name="filepath">Filepath to texture</param>
+        /// <param name="textureLayout">Texture layout</param>
+        /// <returns></returns>
+        public static Texture FromFile(string filepath, TextureLayout textureLayout)
+        {
+            try
+            {
+                if (filepath == null)
+                    throw new ArgumentNullException(nameof(filepath));
+                Image texImg = Image.FromFile(filepath);
+                Texture texture = new Texture(texImg, textureLayout);
+                return texture;
+            }
+            catch (Exception ex)
+            {
+                throw new ContentLoadException("Unable to load texture from " + filepath + "! Inner exception message: " + ex.Message, ex);
+            }
+        }
     }
 
     /// <summary>
