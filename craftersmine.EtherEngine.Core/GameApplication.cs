@@ -46,6 +46,8 @@ namespace craftersmine.EtherEngine.Core
         public static void SetLogger(string logsRoot, string logName)
         {
             Logger = new Logger(Path.Combine(AppDataPath, logsRoot), logName);
+            Log(LogEntryType.Info, "Initiated EtherEngine (c) craftersmine 2018");
+            Log(LogEntryType.Info, "");
         }
 
         public static void Log(LogEntryType prefix, string contents, bool onlyConsole = false) => Logger?.Log(prefix, contents, onlyConsole);
