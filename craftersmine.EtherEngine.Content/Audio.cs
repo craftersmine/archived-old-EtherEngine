@@ -37,5 +37,24 @@ namespace craftersmine.EtherEngine.Content
         {
             return waveFile;
         }
+
+        /// <summary>
+        /// Loads wave audio from file
+        /// </summary>
+        /// <param name="filepath">Filepath to wave audio</param>
+        /// <returns></returns>
+        public static Audio FromFile(string filepath)
+        {
+            try
+            {
+                WaveFileReader waveFileReader = new WaveFileReader(filepath);
+                Audio audio = new Audio(waveFileReader);
+                return audio;
+            }
+            catch (Exception ex)
+            {
+                throw new ContentLoadException("Unable to load audio from " + filepath + "! Inner exception message: " + ex.Message, ex);
+            }
+        }
     }
 }
