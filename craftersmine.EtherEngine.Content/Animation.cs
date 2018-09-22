@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,6 +78,47 @@ namespace craftersmine.EtherEngine.Content
         public Image GetFrame(int frameId)
         {
             return frames[frameId];
+        }
+
+        /// <summary>
+        /// Loads animation metadata from file and specified <see cref="Texture"/>
+        /// </summary>
+        /// <param name="animationMetadataFilepath">Filepath to animaition metadata</param>
+        /// <param name="animationTexture">Animation texture</param>
+        /// <returns></returns>
+        public static Animation FromFile(string animationMetadataFilepath, Texture animationTexture)
+        {
+            try
+            {
+                string[] animationMetadata = File.ReadAllLines(animationMetadataFilepath);
+                int animFrmDuration = 0;
+                int animFrmCount = 0;
+                int frameWidth = 0;
+                foreach (var ln in animationMetadata)
+                {
+                    string[] split = ln.Split('=');
+                    switch (split[0].ToLower())
+                    {
+                        case "frameticktrigger":
+                            if (!int.TryParse(split[1], out animFrmDuration))
+                                throw new ContentLoadException("Unable to load animation metadata from " + animationMetadataFilepath + "! Invalid metadata parameter value: \"" + split[0] + "=" + split[1] + "\" must be numerical Int32 value");
+                            break;
+                        case "framecount":
+                            if (!int.TryParse(split[1], out animFrmCount))
+                                throw new ContentLoadException("Unable to load animation metadata from " + animationMetadataFilepath + "! Invalid metadata parameter value: \"" + split[0] + "=" + split[1] + "\" must be numerical Int32 value");
+                            break;
+                        case "framewidth":
+                            if (!int.TryParse(split[1], out frameWidth))
+                                throw new ContentLoadException("Unable to load animation metadata from " + animationMetadataFilepath + "! Invalid metadata parameter value: \"" + split[0] + "=" + split[1] + "\" must be numerical Int32 value");
+                            break;
+                    }
+                }
+                return new Animation(animationTexture, animFrmCount, animFrmDuration, frameWidth);
+            }
+            catch (Exception ex)
+            {
+                throw new ContentLoadException("Unable to load animation from " + animationMetadataFilepath + "! Inner exception message: " + ex.Message, ex);
+            }
         }
     }
 }
