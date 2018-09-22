@@ -20,8 +20,8 @@ Allows you to create games with simple visuals
 |:------------------------|:---------------------------------------------------------------------------------------------------------:|
 | Jenkins CI Build Status | ![Build Status Badge](http://craftersmine-ci.ddns.net/job/EtherEngine/badge/icon)                         |
 | Repository Size         | ![Repository Size](https://img.shields.io/github/repo-size/craftersmine/EtherEngine.svg)                  |
-| Licence                 | ![Repository Licence](https://img.shields.io/github/license/craftersmine/EtherEngine.svg)                 |
-| Current Version (Tag)   | ![Last tag](https://img.shields.io/github/tag/craftersmine/EtherEngine.svg)                               |
-| Release Date            | ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/craftersmine/EtherEngine.svg) |
-| Last Commit Date        | ![Last commit](https://img.shields.io/github/last-commit/craftersmine/EtherEngine.svg)                    |
+| Licence                 | ![[Repository Licence](https://img.shields.io/github/license/craftersmine/EtherEngine.svg)](https://github.com/craftersmine/EtherEngine/blob/master/LICENSE.md)                 |
+| Current Version (Tag)   | ![[Last tag](https://img.shields.io/github/tag/craftersmine/EtherEngine.svg)](https://github.com/craftersmine/EtherEngine/tags)                               |
+| Release Date            | ![[GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/craftersmine/EtherEngine.svg)](https://github.com/craftersmine/EtherEngine/releases) |
+| Last Commit Date        | ![[Last commit](https://img.shields.io/github/last-commit/craftersmine/EtherEngine.svg)](https://github.com/craftersmine/EtherEngine/commits/master)                    |
 | Game Engine Type        | ![2D Game Engine](https://img.shields.io/badge/game%20engine-2D-green.svg)                 	              |
