@@ -53,6 +53,8 @@ namespace craftersmine.EtherEngine.Core
             Canvas.Size = this.Size;
             Canvas.MouseClick += Canvas_MouseClick;
             Canvas.MouseMove += Canvas_MouseMove;
+            Canvas.KeyUp += Canvas_KeyUp;
+            Canvas.KeyDown += Canvas_KeyDown;
             this.Controls.Add(Canvas);
             // Set frame
             IsFramed = isFramed;
@@ -60,6 +62,16 @@ namespace craftersmine.EtherEngine.Core
             BaseColor = Color.LightSkyBlue;
             Canvas.RazorGFX.Clear(BaseColor);
             Canvas.RazorPaint();
+        }
+
+        private void Canvas_KeyDown(object sender, KeyEventArgs e)
+        {
+            Keyboard.UpdateKeys(e.KeyData, e.Modifiers);
+        }
+
+        private void Canvas_KeyUp(object sender, KeyEventArgs e)
+        {
+            Keyboard.UpdateKeys(Keys.None, Keys.None);
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
