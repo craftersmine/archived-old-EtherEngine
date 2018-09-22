@@ -15,6 +15,7 @@ namespace craftersmine.EtherEngine.Core
         public static bool IsProcessActive { get; internal set; }
         public static Logger Logger { get; internal set; }
         public static string AppDataPath { get; internal set; }
+        public static int GameFramerate { get { return Renderer.Framerate; } }
 
         internal static GameWindow GameWindow { get; set; }
         internal static Renderer Renderer { get; set; }

@@ -25,7 +25,6 @@ namespace craftersmine.EtherEngine.Core
         private Graphics LightBufferDrawer { get; set; }  // Light graphics drawer
         private int DrawCall { get; set; }  // Counted drawcalls
         private int LastDrawCall { get; set; }  // Last FPS counter written draw call
-        private int Framerate { get; set; }  // Current game framerate
         private System.Threading.Timer FPSTimer { get; set; }  // FPS counter
 
         // GameObject boundings rectangle pen
@@ -55,6 +54,8 @@ namespace craftersmine.EtherEngine.Core
         /// Gets or sets additional debug info at main debug info on screen
         /// </summary>
         public string AdditionalDebugInfo { get; set; }
+
+        public int Framerate { get; internal set; } 
 
         // Main draw caller
         private void DrawCaller()
