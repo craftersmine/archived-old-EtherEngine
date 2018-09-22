@@ -51,7 +51,7 @@ namespace TestApp
         GameObject cameraBinded = new GameObject();
         Timer timer = new Timer() { Interval = 2000, Enabled = true };
         Scene scene1 = new Scene() { BackgroundColor = Color.Green };
-        public Window() : base("GameWindow", new WindowSize(WindowSizePresets.SVGA), true)
+        public Window() : base("GameWindow | Second: {tick}", new WindowSize(WindowSizePresets.SVGA), true)
         {
             timer.Tick += Timer_Tick;
             Scene scene = new Scene() { BackgroundColor = Color.Red };
@@ -107,6 +107,14 @@ namespace TestApp
             button.Transform.Place(100, 100);
             scene1.AddUIControl(button);
             //cameraBinded.IsCameraSticked = true;
+            Coroutine coroutine = new Coroutine(new CoroutineMethod(() => 
+            {
+                this.Invoke(new Action(() =>
+                {
+                    Title = "GameWindow | Second: {tick}";
+                    Title = Title.Replace("{tick}", DateTime.Now.Second.ToString());
+                }));
+            }), "Test Coroutine");
             audioChannel.ChannelVolume = 0.1f;
             audioChannel.Play();
             double[,] perlinData = new double[16, 16];
@@ -130,6 +138,7 @@ namespace TestApp
                 }
                 GameApplication.Log(LogEntryType.Info, arrCtor);
             }
+            coroutine.StartCoroutine();
         }
 
         public int objInitialSpeed = 5;
