@@ -77,7 +77,7 @@ namespace TestApp
             Texture bg = new Texture(Image.FromFile(@"G:\Родион\Images\_PNG\12.png"), TextureLayout.Default);
             scene1.BackgroundTexture = bg;
             scene1.LightValue = 0.8f;
-            Audio audio = new Audio(WaveFileReaderFromBytesConverter.ByteArrayToWaveFileReader(File.ReadAllBytes(@"D:\Родион\Desktop\testAssets\aud.wav")));
+            Audio audio = Audio.FromFile(@"D:\Родион\Desktop\testAssets\aud.wav");
             AudioChannel audioChannel = new AudioChannel("test", audio);
             Texture texture = new Texture(Image.FromFile(@"D:\Родион\VS\MyGame2\resources\raw\maps\textures\overworld_base_river.png"), TextureLayout.Default);
             Texture texturetiled = new Texture(Image.FromFile(@"D:\Родион\VS\MyGame2\resources\raw\maps\textures\overworld_base_river.png"), TextureLayout.Tile);
@@ -155,6 +155,7 @@ namespace TestApp
             this.SetTexture(texture);
             this.Transform.SetSize(32, 32);
             this.CollisionBox.SetCollisionBox(0, 0, 32, 32);
+            this.Transform.Place(0, 0);
         }
 
         public override void OnCollision(GameObject gameObject)
