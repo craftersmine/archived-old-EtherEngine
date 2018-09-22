@@ -62,9 +62,9 @@ namespace craftersmine.EtherEngine.Core
                 GameApplication.Renderer.DrawDebugRects = true;
             else GameApplication.Renderer.DrawDebugRects = false;
 
-            // Shift + Ctrl + F12 => Shows log viewer
-            if (Keyboard.IsKeyDown(System.Windows.Forms.Keys.ControlKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.ShiftKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.F12) && !IsLogViewerVisible)
-                ShowLogViewer();
+            // Shift + Ctrl + F12 => Shows coroutine debug
+            //if (Keyboard.IsKeyDown(System.Windows.Forms.Keys.ControlKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.ShiftKey) && Keyboard.IsKeyDown(System.Windows.Forms.Keys.F12) && !IsLogViewerVisible)
+            //    ShowLogViewer();
 
             
             GameApplication.GameWindow.OnUpdate();
@@ -80,13 +80,13 @@ namespace craftersmine.EtherEngine.Core
             Ticks++;
         }
 
-        private void ShowLogViewer()
-        {
-            if (!IsLogViewerVisible)
-            {
-                GameApplication.LogViewer?.Show();
-                IsLogViewerVisible = true;
-            }
-        }
+        //private void ShowLogViewer()
+        //{
+        //    if (!IsLogViewerVisible)
+        //    {
+        //        GameApplication.LogViewer?.Show();
+        //        IsLogViewerVisible = true;
+        //    }
+        //}
     }
 }

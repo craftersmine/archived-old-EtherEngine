@@ -64,6 +64,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="CollisionBox.cs" />
     <Compile Include="Core\WindowSize.cs" />
+    <Compile Include="Coroutine.cs" />
     <Compile Include="GameApplication.cs" />
     <Compile Include="GameEngineLogViewer.cs">
       <SubType>Form</SubType>
