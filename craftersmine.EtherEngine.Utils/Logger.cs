@@ -49,6 +49,27 @@ namespace craftersmine.EtherEngine.Utils
 #if DEBUG
             if (!isOnlyConsole)
                 File.AppendAllText(_file, logLineCtor);
+            switch (prefix)
+            {
+                default:
+                case LogEntryType.Info:
+                case LogEntryType.Done:
+                case LogEntryType.Success:
+                case LogEntryType.Connection:
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+                case LogEntryType.Error:
+                case LogEntryType.Critical:
+                case LogEntryType.Crash:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case LogEntryType.Warning:
+                case LogEntryType.Unknown:
+                case LogEntryType.Stacktrace:
+                case LogEntryType.Debug:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+            }
             Console.Write(logLineCtor);
             LogEntry entry = new LogEntry { Contents = contents, EntryDateTime = _date, Type = prefix };
             LogEntries.Add(entry);
@@ -62,7 +83,7 @@ namespace craftersmine.EtherEngine.Utils
                 LogEntries.Add(entry);
             }
 #endif
-
+            Console.ResetColor();
         }
 
         /// <summary>
