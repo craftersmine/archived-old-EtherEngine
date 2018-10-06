@@ -123,7 +123,7 @@ namespace TestApp
             {
                 for (double y = 0; y < 1.0d; y += 0.0625d)
                 {
-                    perlinData[xArr, yArr] = PerlinNoise.GetNoiseData(x, y, 0);
+                    perlinData[xArr, yArr] = new PerlinNoise().GetNoiseData(x, y, 0);
                     yArr++;
                 }
                 xArr++;
