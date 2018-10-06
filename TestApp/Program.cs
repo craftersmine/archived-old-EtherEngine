@@ -49,6 +49,8 @@ namespace TestApp
         GameObject testGameObj = new GameObject();
         GameObject testGameObj1 = new GameObject();
         GameObject cameraBinded = new GameObject();
+        GameLayer Terrain = new GameLayer();
+        GameLayer Objs = new GameLayer();
         Timer timer = new Timer() { Interval = 2000, Enabled = true };
         Scene scene1 = new Scene() { BackgroundColor = Color.Green };
         public Window() : base("GameWindow | Second: {tick}", new WindowSize(WindowSizePresets.SVGA), true)
@@ -83,7 +85,7 @@ namespace TestApp
             Texture texturetiled = new Texture(Image.FromFile(@"D:\Родион\VS\MyGame2\resources\raw\maps\textures\overworld_base_river.png"), TextureLayout.Tile);
             testGameObj.SetTexture(texture);
             testGameObj.CollisionBox.SetCollisionBox(0, 0, 32, 32);
-            scene1.AddGameObject(testGameObj);
+            Objs.AddGameObject(testGameObj);
             testGameObj1.Transform.Place(80, 30);
             testGameObj1.Transform.SetSize(32, 32);
             testGameObj1.CollisionBox.SetCollisionBox(0, 0, 32, 32);
@@ -95,17 +97,27 @@ namespace TestApp
             cameraBinded.Transform.SetSize(48, 48);
             cameraBinded.SetTexture(texturetiled);
             cameraBinded.CollisionBox.SetCollisionBox(2, 2, 28, 28);
-            scene1.AddGameObject(testGameObj);
-            scene1.AddGameObject(testGameObj1);
-            scene1.AddGameObject(cameraBinded);
+            Objs.AddGameObject(testGameObj);
+            Objs.AddGameObject(testGameObj1);
+            Objs.AddGameObject(cameraBinded);
+            Texture grass = Texture.FromFile(@"D:\Родион\VS\MyGame2\resources\raw\maps\textures\overworld_map_base_grass.png", TextureLayout.Default);
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    Terrain.AddGameObject(new GrassObject(grass, x * 16, y * 16));
+                }
+            }
             TestObj tobj = new TestObj(cameraBinded);
-            scene1.AddGameObject(tobj);
+            Objs.AddGameObject(tobj);
             TestUIControl control = new TestUIControl();
             Texture buttonTex = new Texture(Image.FromFile(@"D:\Родион\fankit\TestButtonTexture.png"), TextureLayout.Stretch);
             UIButton button = new UIButton(100, 32, buttonTex, 32);
             scene1.AddUIControl(control);
             button.Transform.Place(100, 100);
             scene1.AddUIControl(button);
+            scene1.AddGameLayer(0, Terrain);
+            scene1.AddGameLayer(1, Objs);
             //cameraBinded.IsCameraSticked = true;
             Coroutine coroutine = new Coroutine(new CoroutineMethod(() => 
             {
@@ -172,6 +184,16 @@ namespace TestApp
             base.OnCollision(gameObject);
             if (gameObject == collidableObj)
                 GameApplication.Log(LogEntryType.Info, "Collided with object");
+        }
+    }
+
+    public class GrassObject : GameObject
+    {
+        public GrassObject(Texture tex, int x, int y)
+        {
+            this.SetTexture(tex);
+            this.Transform.SetSize(16, 16);
+            this.Transform.Place(x, y);
         }
     }
 }
