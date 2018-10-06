@@ -60,6 +60,7 @@ namespace craftersmine.EtherEngine.Core
             IsFramed = isFramed;
             // Prepare canvas
             BaseColor = Color.LightSkyBlue;
+
             Canvas.RazorGFX.Clear(BaseColor);
             Canvas.RazorPaint();
         }
@@ -79,15 +80,18 @@ namespace craftersmine.EtherEngine.Core
             MousePoint = new Rectangle(e.X, e.Y, 1, 1);
             if (this.CurrentScene != null)
             {
-                for (int i = 0; i < this.CurrentScene.GameObjects.Count; i++)
+                foreach (var layer in GameApplication.GameWindow.CurrentScene.GameLayers)
                 {
-                    if (MousePoint.IntersectsWith(this.CurrentScene.GameObjects[i].Transform.CameraBoundings))
-                        this.CurrentScene.GameObjects[i].OnMouseHover(MousePoint.X, MousePoint.Y);
-                }
-                for (int u = 0; u < this.CurrentScene.UIControls.Count; u++)
-                {
-                    if (MousePoint.IntersectsWith(this.CurrentScene.UIControls[u].Transform.BoundingsRectangle))
-                        this.CurrentScene.UIControls[u].OnMouseHover(MousePoint.X, MousePoint.Y);
+                    for (int i = 0; i < layer.Value.GameObjects.Count; i++)
+                    {
+                        if (MousePoint.IntersectsWith(layer.Value.GameObjects[i].Transform.CameraBoundings))
+                            layer.Value.GameObjects[i].OnMouseHover(MousePoint.X, MousePoint.Y);
+                    }
+                    for (int u = 0; u < this.CurrentScene.UIControls.Count; u++)
+                    {
+                        if (MousePoint.IntersectsWith(this.CurrentScene.UIControls[u].Transform.BoundingsRectangle))
+                            this.CurrentScene.UIControls[u].OnMouseHover(MousePoint.X, MousePoint.Y);
+                    }
                 }
             }
         }
@@ -97,15 +101,18 @@ namespace craftersmine.EtherEngine.Core
             MousePoint = new Rectangle(e.X, e.Y, 1, 1);
             if (this.CurrentScene != null)
             {
-                for (int i = 0; i < this.CurrentScene.GameObjects.Count; i++)
+                foreach (var layer in GameApplication.GameWindow.CurrentScene.GameLayers)
                 {
-                    if (MousePoint.IntersectsWith(this.CurrentScene.GameObjects[i].Transform.CameraBoundings))
-                        this.CurrentScene.GameObjects[i].OnMouseClick(e.Button, MousePoint.X, MousePoint.Y);
-                }
-                for (int u = 0; u < this.CurrentScene.UIControls.Count; u++)
-                {
-                    if (MousePoint.IntersectsWith(this.CurrentScene.UIControls[u].Transform.BoundingsRectangle))
-                        this.CurrentScene.UIControls[u].OnMouseClick(e.Button, MousePoint.X, MousePoint.Y);
+                    for (int i = 0; i < layer.Value.GameObjects.Count; i++)
+                    {
+                        if (MousePoint.IntersectsWith(layer.Value.GameObjects[i].Transform.CameraBoundings))
+                            layer.Value.GameObjects[i].OnMouseClick(e.Button, MousePoint.X, MousePoint.Y);
+                    }
+                    for (int u = 0; u < this.CurrentScene.UIControls.Count; u++)
+                    {
+                        if (MousePoint.IntersectsWith(this.CurrentScene.UIControls[u].Transform.BoundingsRectangle))
+                            this.CurrentScene.UIControls[u].OnMouseClick(e.Button, MousePoint.X, MousePoint.Y);
+                    }
                 }
             }
         }

@@ -13,9 +13,11 @@ namespace craftersmine.EtherEngine.Core
     /// </summary>
     public class Scene
     {
-        internal List<GameObject> GameObjects { get; set; } = new List<GameObject>();
+        private GameLayer BaseSceneLayer { get; set; }
+        //internal List<GameObject> GameObjects { get; set; } = new List<GameObject>();
         internal List<UIControl> UIControls { get; set; } = new List<UIControl>();
         internal Dictionary<string, AudioChannel> AudioChannels { get; set; } = new Dictionary<string, AudioChannel>();
+        internal SortedDictionary<int, GameLayer> GameLayers { get; set; } = new SortedDictionary<int, GameLayer>();
         /// <summary>
         /// Gets scene camera
         /// <summary>
@@ -47,6 +49,8 @@ namespace craftersmine.EtherEngine.Core
         public Scene()
         {
             Camera = new Camera(0, 0, Width, Height);
+            BaseSceneLayer = new GameLayer();
+            AddGameLayer(int.MinValue, BaseSceneLayer);
         }
 
         /// <summary>
@@ -55,8 +59,7 @@ namespace craftersmine.EtherEngine.Core
         /// <param name="gameObject">Game Object to add</param>
         public void AddGameObject(GameObject gameObject)
         {
-            GameObjects.Add(gameObject);
-            gameObject.OnCreate();
+            BaseSceneLayer.AddGameObject(gameObject);
         }
         /// <summary>
         /// Removes <see cref="GameObject"/> from scene
@@ -64,8 +67,7 @@ namespace craftersmine.EtherEngine.Core
         /// <param name="gameObject">Game Object instance to remove</param>
         public void RemoveGameObject(GameObject gameObject)
         {
-            GameObjects.Remove(gameObject);
-            gameObject.OnDestroy();
+            BaseSceneLayer.RemoveGameObject(gameObject);
         }
         /// <summary>
         /// Adds <see cref="UIControl"/> to scene
@@ -83,6 +85,20 @@ namespace craftersmine.EtherEngine.Core
         {
             UIControls.Remove(control);
         }
+
+        public void AddGameLayer(int layerLevel, GameLayer gameLayer)
+        {
+            if (!GameLayers.ContainsKey(layerLevel))
+                GameLayers.Add(layerLevel, gameLayer);
+            else GameApplication.Log(Utils.LogEntryType.Warning, "Unable to add game layer with layer level " + layerLevel + "! Game layer on level " + layerLevel + " already exists!");
+        }
+
+        public void RemoveGameLayer(int layerLevel)
+        {
+            if (GameLayers.ContainsKey(layerLevel))
+                GameLayers.Remove(layerLevel);
+        }
+
         /// <summary>
         /// Calls at create event
         /// </summary>
@@ -100,9 +116,12 @@ namespace craftersmine.EtherEngine.Core
 
         internal void UpdateCameraOffsettedPositions()
         {
-            for (int i = 0; i < GameObjects.Count; i++)
+            foreach (var layer in GameLayers)
             {
-                GameObjects[i].Transform.SetCameraPosition(Camera.X, Camera.Y);
+                for (int i = 0; i < layer.Value.GameObjects.Count; i++)
+                {
+                    layer.Value.GameObjects[i].Transform.SetCameraPosition(Camera.X, Camera.Y);
+                }
             }
         }
     }

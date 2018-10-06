@@ -140,51 +140,54 @@ namespace craftersmine.EtherEngine.Core
         // Game Object drawer
         private void _drawGameObjects()
         {
-            // If current scene have any gameobject draw it
-            if (GameApplication.GameWindow.CurrentScene.GameObjects.Any())
+            // If current scene have any game layer start draw layers
+            if (GameApplication.GameWindow.CurrentScene.GameLayers.Any())
             {
-                for (int gObjIndex = 0; gObjIndex < GameApplication.GameWindow.CurrentScene.GameObjects.Count; gObjIndex++)
+                foreach (var layer in GameApplication.GameWindow.CurrentScene.GameLayers)
                 {
-                    // If game object bounding box intersects with camera bounding box (In viewport) continue
-                    if (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.CameraBoundings.IntersectsWith(GameApplication.GameWindow.CurrentScene.Camera.CameraBounds))
+                    for (int gObjIndex = 0; gObjIndex < layer.Value.GameObjects.Count; gObjIndex++)
                     {
-                        GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].IsCameraVisible = true;  // Set that object is in viewport
-                        // If game object layout is tiled and game object have invalid cached tiled texture, then
-                        if (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].ObjectTexture.TextureLayout == TextureLayout.Tile && GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].IsInvalidTiledTextureCache)
+                        // If game object bounding box intersects with camera bounding box (In viewport) continue
+                        if (layer.Value.GameObjects[gObjIndex].Transform.CameraBoundings.IntersectsWith(GameApplication.GameWindow.CurrentScene.Camera.CameraBounds))
                         {
-                            // Prepare and save tiled texture in cache
-                            GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].CachedTiledTexture = PrepareTiledTexture(GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].ObjectTexture, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.BoundingsRectangle);
-                            // Set that game object have now valid tiled texture in cache
-                            GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].IsInvalidTiledTextureCache = false;
-                        }
-                        // Draw game object texture in main buffer
-                        MainBufferDrawer.DrawImage(GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].DrawableImage, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.CameraBoundings);
+                            layer.Value.GameObjects[gObjIndex].IsCameraVisible = true;  // Set that object is in viewport
+                                                                                                                                            // If game object layout is tiled and game object have invalid cached tiled texture, then
+                            if (layer.Value.GameObjects[gObjIndex].ObjectTexture.TextureLayout == TextureLayout.Tile && layer.Value.GameObjects[gObjIndex].IsInvalidTiledTextureCache)
+                            {
+                                // Prepare and save tiled texture in cache
+                                layer.Value.GameObjects[gObjIndex].CachedTiledTexture = PrepareTiledTexture(layer.Value.GameObjects[gObjIndex].ObjectTexture, layer.Value.GameObjects[gObjIndex].Transform.BoundingsRectangle);
+                                // Set that game object have now valid tiled texture in cache
+                                layer.Value.GameObjects[gObjIndex].IsInvalidTiledTextureCache = false;
+                            }
+                            // Draw game object texture in main buffer
+                            MainBufferDrawer.DrawImage(layer.Value.GameObjects[gObjIndex].DrawableImage, layer.Value.GameObjects[gObjIndex].Transform.CameraBoundings);
 
-                        //if (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].IsIlluminatingLight)
-                        //{
-                        //    GraphicsPath lightPath = new GraphicsPath();
-                        //    Rectangle lightRect = new Rectangle((GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Width * 5) / 2 - (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Width / 2), (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Height * 5) / 2 - (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Height / 2), GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Width * 5, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Height * 5);
-                        //    lightPath.AddEllipse(lightRect);
-                        //    using (PathGradientBrush grad = new PathGradientBrush(lightPath))
-                        //    {
-                        //        grad.CenterColor = GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].LightColor;
-                        //        grad.SurroundColors = new Color[] { Color.Black };
-                        //        LightBufferDrawer.FillRectangle(grad, lightRect);
-                        //    }
-                        //}
+                            //if (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].IsIlluminatingLight)
+                            //{
+                            //    GraphicsPath lightPath = new GraphicsPath();
+                            //    Rectangle lightRect = new Rectangle((GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Width * 5) / 2 - (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Width / 2), (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Height * 5) / 2 - (GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Height / 2), GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Width * 5, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.Height * 5);
+                            //    lightPath.AddEllipse(lightRect);
+                            //    using (PathGradientBrush grad = new PathGradientBrush(lightPath))
+                            //    {
+                            //        grad.CenterColor = GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].LightColor;
+                            //        grad.SurroundColors = new Color[] { Color.Black };
+                            //        LightBufferDrawer.FillRectangle(grad, lightRect);
+                            //    }
+                            //}
 
-                        // If true draw debug rectangles (Main bounding box and collision box)
-                        if (DrawDebugRects)
-                        {
-                            MainBufferDrawer.DrawRectangle(DebugRectangleBoundings, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.CameraBoundings);  // GameObject main bounding box
-                            MainBufferDrawer.DrawRectangle(DebugCollisionBoxRectangleBoundings, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].CollisionBox.CollisionBoxBoundings);  // GameObject collision bounding box
+                            // If true draw debug rectangles (Main bounding box and collision box)
+                            if (DrawDebugRects)
+                            {
+                                MainBufferDrawer.DrawRectangle(DebugRectangleBoundings, layer.Value.GameObjects[gObjIndex].Transform.CameraBoundings);  // GameObject main bounding box
+                                MainBufferDrawer.DrawRectangle(DebugCollisionBoxRectangleBoundings, layer.Value.GameObjects[gObjIndex].CollisionBox.CollisionBoxBoundings);  // GameObject collision bounding box
+                            }
+                            // Draw debug info about that object
+                            if (DrawDebugInfo)
+                                MainBufferDrawer.DrawString("X: " + layer.Value.GameObjects[gObjIndex].X + "\r\nY: " + layer.Value.GameObjects[gObjIndex].Y + "\r\nCamX: " + layer.Value.GameObjects[gObjIndex].Transform.CameraX + "\r\nCamY: " + layer.Value.GameObjects[gObjIndex].Transform.CameraY, GameApplication.GameWindow.Font, FontBrush, layer.Value.GameObjects[gObjIndex].Transform.CameraX, layer.Value.GameObjects[gObjIndex].Transform.CameraY);
                         }
-                        // Draw debug info about that object
-                        if (DrawDebugInfo)
-                            MainBufferDrawer.DrawString("X: " + GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].X + "\r\nY: " + GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Y + "\r\nCamX: " + GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.CameraX + "\r\nCamY: " + GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.CameraY, GameApplication.GameWindow.Font, FontBrush, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.CameraX, GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].Transform.CameraY);
+                        // Or if game object don't intersects with camera bounding box (Not in viewport), set that game object no being visible by camera
+                        else layer.Value.GameObjects[gObjIndex].IsCameraVisible = false;
                     }
-                    // Or if game object don't intersects with camera bounding box (Not in viewport), set that game object no being visible by camera
-                    else GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].IsCameraVisible = false;
                 }
             }
         }

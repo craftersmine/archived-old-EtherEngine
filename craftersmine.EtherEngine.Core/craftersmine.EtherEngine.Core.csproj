@@ -72,6 +72,7 @@
     <Compile Include="GameEngineLogViewer.Designer.cs">
       <DependentUpon>GameEngineLogViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameLayer.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameUpdater.cs" />
     <Compile Include="GameWindow.cs">

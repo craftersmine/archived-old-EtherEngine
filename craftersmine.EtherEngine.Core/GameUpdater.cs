@@ -42,10 +42,13 @@ namespace craftersmine.EtherEngine.Core
         private void GamePhysicsUpdaterMethod(object state)
         {
             if (GameApplication.GameWindow.CurrentScene != null)
-                for (int i = 0; i < GameApplication.GameWindow.CurrentScene.GameObjects.Count; i++)
+                foreach(var layer in GameApplication.GameWindow.CurrentScene.GameLayers)
                 {
-                    GameApplication.GameWindow.CurrentScene.GameObjects[i].InternalPhysicsUpdate();
-                    GameApplication.GameWindow.CurrentScene.GameObjects[i].CheckCollisionFor(GameApplication.GameWindow.CurrentScene.GameObjects);
+                    for (int i = 0; i < layer.Value.GameObjects.Count; i++)
+                    {
+                        layer.Value.GameObjects[i].InternalPhysicsUpdate();
+                        layer.Value.GameObjects[i].CheckCollisionFor(layer.Value.GameObjects);
+                    }
                 }
             PhysicsUpdates++;
         }
@@ -71,10 +74,13 @@ namespace craftersmine.EtherEngine.Core
             if (GameApplication.GameWindow.CurrentScene != null)
             {
                 GameApplication.GameWindow.CurrentScene.OnUpdate();
-                for (int gObjIndex = 0; gObjIndex < GameApplication.GameWindow.CurrentScene.GameObjects.Count; gObjIndex++)
+                foreach (var layer in GameApplication.GameWindow.CurrentScene.GameLayers)
                 {
-                    GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].OnUpdate();
-                    GameApplication.GameWindow.CurrentScene.GameObjects[gObjIndex].InternalUpdate();
+                    for (int gObjIndex = 0; gObjIndex < layer.Value.GameObjects.Count; gObjIndex++)
+                    {
+                        layer.Value.GameObjects[gObjIndex].OnUpdate();
+                        layer.Value.GameObjects[gObjIndex].InternalUpdate();
+                    }
                 }
             }
             Ticks++;
