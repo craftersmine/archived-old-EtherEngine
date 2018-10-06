@@ -13,12 +13,14 @@
 //   ---------
 */
 
+using System;
+
 namespace craftersmine.EtherEngine.Core.Math
 {
     public class PerlinNoise
     {
 
-        public static double OctavePerlin(double x, double y, double z, int octaves, double persistence)
+        public double OctavePerlin(double x, double y, double z, int octaves, double persistence)
         {
             double total = 0;
             double frequency = 1;
@@ -34,7 +36,7 @@ namespace craftersmine.EtherEngine.Core.Math
             return total;
         }
 
-        private static int[] Permutation { get; } = { 151,160,137,91,90,15,					// Hash lookup table as defined by Ken Perlin.  This is a randomly
+        private int[] Permutation { get; } = { 151,160,137,91,90,15,					// Hash lookup table as defined by Ken Perlin.  This is a randomly
 		131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,	// arranged array of all numbers from 0-255 inclusive.
 		190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
         88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
@@ -49,10 +51,18 @@ namespace craftersmine.EtherEngine.Core.Math
         138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
     };
 
-        private static readonly int[] p;                                                    // Doubled permutation to avoid overflow
+        private readonly int[] p;                                                    // Doubled permutation to avoid overflow
 
-        static PerlinNoise()
+        public PerlinNoise() : this(new Random().Next(int.MaxValue))
+        { }
+
+        public PerlinNoise(int seed)
         {
+            Random rnd = new Random(seed);
+            for (int i = 0; i < Permutation.Length; i++)
+            {
+                Permutation[i] = rnd.Next(0, 255);
+            }
             p = new int[512];
             for (int x = 0; x < 512; x++)
             {
@@ -60,7 +70,7 @@ namespace craftersmine.EtherEngine.Core.Math
             }
         }
 
-        public static double GetNoiseData(double x, double y, double z)
+        public double GetNoiseData(double x, double y, double z)
         {
             //if (repeat > 0)
             //{                                   // If we have any repeat on, change the coordinates to their "local" repetitions
@@ -108,7 +118,7 @@ namespace craftersmine.EtherEngine.Core.Math
             return (Lerp(y1, y2, w) + 1) / 2;                       // For convenience we bound it to 0 - 1 (theoretical min/max before is -1 - 1)
         }
 
-        public static double Grad(int hash, double x, double y, double z)
+        public double Grad(int hash, double x, double y, double z)
         {
             int h = hash & 15;                                  // Take the hashed value and take the first 4 bits of it (15 == 0b1111)
             double u = h < 8 /* 0b1000 */ ? x : y;              // If the most signifigant bit (MSB) of the hash is 0 then set u = x.  Otherwise y.
@@ -126,7 +136,7 @@ namespace craftersmine.EtherEngine.Core.Math
             return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v); // Use the last 2 bits to decide if u and v are positive or negative.  Then return their addition.
         }
 
-        public static double Fade(double t)
+        public double Fade(double t)
         {
             // Fade function as defined by Ken Perlin.  This eases coordinate values
             // so that they will "ease" towards integral values.  This ends up smoothing
@@ -134,7 +144,7 @@ namespace craftersmine.EtherEngine.Core.Math
             return t * t * t * (t * (t * 6 - 15) + 10);         // 6t^5 - 15t^4 + 10t^3
         }
 
-        public static double Lerp(double a, double b, double x)
+        public double Lerp(double a, double b, double x)
         {
             return a + x * (b - a);
         }
