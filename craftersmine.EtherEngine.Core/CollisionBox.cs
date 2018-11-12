@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace craftersmine.EtherEngine.Utils
+namespace craftersmine.EtherEngine.Core
 {
     /// <summary>
     /// Represents collision box. This class cannot be inherited
@@ -23,7 +23,7 @@ namespace craftersmine.EtherEngine.Utils
 
         public void UpdateCollisionBox(Transform objTransform)
         {
-            CollisionBoxBoundings = new Rectangle(objTransform.CameraX + XOffset, objTransform.CameraY + YOffset, Width, Height);
+            CollisionBoxBoundings = new Rectangle((int)objTransform.CameraX + XOffset, (int)objTransform.CameraY + YOffset, Width, Height);
         }
 
         public void SetCollisionBox(int xOff, int yOff, int width, int height)
