@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using craftersmine.EtherEngine.Content;
 
 namespace craftersmine.EtherEngine.Core
@@ -12,9 +15,13 @@ namespace craftersmine.EtherEngine.Core
         public Animation Animation { get; set; }
         public Transform Transform { get; private set; }
         public CollisionBox CollisionBox { get; private set; }
+        public string InternalGameName { get; set; }
 
-        internal Image GameObjectBase { get; private set; }
+        internal Rectangle GameObjectBase { get; private set; }
+        internal Label DebugLabel { get; set; }
         internal Texture CurrentTexture { get; set; }
+        internal bool IsRendererProcessed { get; set; }
+        internal int InternalRandomId { get; private set; }
 
         public GameObject()
         { }
@@ -35,7 +42,7 @@ namespace craftersmine.EtherEngine.Core
         {
             GameObjectBase.Width = Transform.Bounds.Width;
             GameObjectBase.Height = Transform.Bounds.Height;
-            GameObjectBase.Margin = new System.Windows.Thickness(Transform.Position.X, GameObjectBase.Margin.Top, GameObjectBase.Margin.Right, Transform.Position.Y);
+            //GameObjectBase.Margin = new System.Windows.Thickness(Transform.Position.X, GameObjectBase.Margin.Top, GameObjectBase.Margin.Right, Transform.Position.Y);
             if (IsAnimated)
             {
                 Animation.CountedTicks++;
@@ -53,15 +60,17 @@ namespace craftersmine.EtherEngine.Core
 
         internal void OnCreatedInternal()
         {
-            Transform = new Transform(new System.Drawing.Rectangle(0, 0, 64, 64));
+            InternalRandomId = new Random().Next(int.MaxValue);
+            InternalGameName = "GameObject@" + InternalRandomId;
+            Transform = new Transform(new Rect(0, 0, 64, 64));
             CollisionBox = new CollisionBox();
             CollisionBox.SetCollisionBox(0, 0, Transform.Bounds.Width, Transform.Bounds.Height);
             Texture = GameApplication.InternalTextures["missingtexture"];
             CurrentTexture = Texture;
-            GameObjectBase = new Image();
+            GameObjectBase = new Rectangle();
             GameObjectBase.Width = Transform.Bounds.Width;
             GameObjectBase.Height = Transform.Bounds.Height;
-            GameObjectBase.Margin = new System.Windows.Thickness(Transform.Position.X, GameObjectBase.Margin.Top, GameObjectBase.Margin.Right, Transform.Position.Y);
+            GameObjectBase.Margin = new Thickness(Transform.RelativeCameraPosition.X, GameObjectBase.Margin.Top, GameObjectBase.Margin.Right, Transform.RelativeCameraPosition.Y);
             OnCreated();
         }
     }
