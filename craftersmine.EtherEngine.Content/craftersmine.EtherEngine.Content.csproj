@@ -57,14 +57,10 @@
     <Compile Include="Audio.cs" />
     <Compile Include="ContentLoadException.cs" />
     <Compile Include="ContentStorage.cs" />
+    <Compile Include="LoopWaveStream.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\craftersmine.EtherEngine.Utils\craftersmine.EtherEngine.Utils.csproj">
-      <Project>{18cd7a59-f7ee-45ad-92de-8eddc2114833}</Project>
-      <Name>craftersmine.EtherEngine.Utils</Name>
-    </ProjectReference>
+    <Compile Include="WaveFileReaderFromBytesConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
