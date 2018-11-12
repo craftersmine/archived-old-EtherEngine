@@ -50,6 +50,7 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AccurateTimer.cs" />
+    <Compile Include="CollisionBox.cs" />
     <Compile Include="Core\WindowSize.cs" />
     <Compile Include="AcceleratedCanvas.cs">
       <SubType>UserControl</SubType>
