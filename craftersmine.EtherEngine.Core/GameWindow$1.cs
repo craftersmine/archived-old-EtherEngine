@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using System.Windows.Input;
+using System.Windows.Media;
 using craftersmine.EtherEngine.Input;
 
 namespace craftersmine.EtherEngine.Core
@@ -129,8 +130,16 @@ namespace craftersmine.EtherEngine.Core
                 CurrentScene?.OnSceneDestroyedInternal();
                 CurrentScene = Scenes[id];
                 GameApplication.Renderer.SceneBgBrush.Color = CurrentScene.BackgroundColor;
+                GameApplication.Renderer.ClearScene();
                 CurrentScene.OnSceneShownInternal();
             }
+        }
+        
+        public void SetTextureInterpolation(BitmapScalingMode mode)
+        {
+            if (GameApplication.Renderer != null)
+                GameApplication.Renderer.TextureInterpolation = mode;
+            else throw new RendererException("Unable to change texture interpolation mode before renderer being initialized!");
         }
     }
 }
