@@ -128,6 +128,7 @@ namespace craftersmine.EtherEngine.Core
             {
                 CurrentScene?.OnSceneDestroyedInternal();
                 CurrentScene = Scenes[id];
+                GameApplication.Renderer.SceneBgBrush.Color = CurrentScene.BackgroundColor;
                 CurrentScene.OnSceneShownInternal();
             }
         }
