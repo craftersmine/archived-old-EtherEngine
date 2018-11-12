@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace craftersmine.EtherEngine.Core
@@ -11,7 +12,6 @@ namespace craftersmine.EtherEngine.Core
     public partial class Scene
     {
         internal List<GameObject> GameObjects { get; set; } = new List<GameObject>();
-        internal List<Coroutine> Coroutines { get; set; } = new List<Coroutine>();
 
         public Viewport Viewport { get; set; }
         public Color BackgroundColor { get; set; } = Colors.Black;
@@ -38,16 +38,6 @@ namespace craftersmine.EtherEngine.Core
             GameObjects.Remove(gameObject);
         }
 
-        public void RegisterCoroutine(Coroutine coroutine)
-        {
-            Coroutines.Add(coroutine);
-        }
-
-        public void UnregisterCoroutine(Coroutine coroutine)
-        {
-            Coroutines.Remove(coroutine);
-        }
-
         internal void OnSceneShownInternal()
         {
             UpdateViewport();
@@ -61,12 +51,14 @@ namespace craftersmine.EtherEngine.Core
 
         internal void OnSceneUpdateInternal()
         {
+            for (int gObj = 0; gObj < GameObjects.Count; gObj++)
+                GameObjects[gObj].Transform.UpdateCoordsRelativeViewport(Viewport.Transform);
             OnUpdate();
         }
 
         internal void UpdateViewport()
         {
-            Viewport = new Viewport(new Transform(GameApplication.GameWnd.ClientRectangle));
+            Viewport = new Viewport(new Transform(new Rect(GameApplication.GameWnd.ClientRectangle.X, GameApplication.GameWnd.ClientRectangle.Y, GameApplication.GameWnd.ClientRectangle.Width, GameApplication.GameWnd.ClientRectangle.Height)));
         }
     }
 }
