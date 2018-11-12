@@ -24,7 +24,7 @@ namespace craftersmine.EtherEngine.Core
 
         Action mAction;
         private int mTimerId;
-        private TimerEventDel mHandler;  // NOTE: declare at class scope so garbage collector doesn't release it!!!
+        private TimerEventDel mHandler;
         public int Delay { get; private set; }
 
         public AccurateTimer(Action callback, int delay)
@@ -44,7 +44,7 @@ namespace craftersmine.EtherEngine.Core
         {
             int err = timeKillEvent(mTimerId);
             timeEndPeriod(1);
-            System.Threading.Thread.Sleep(100);// Ensure callbacks are drained
+            System.Threading.Thread.Sleep(100);
         }
 
         private void TimerCallback(int id, int msg, IntPtr user, int dw1, int dw2)
