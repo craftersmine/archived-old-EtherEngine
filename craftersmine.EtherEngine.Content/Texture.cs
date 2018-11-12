@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace craftersmine.EtherEngine.Content
 {
@@ -22,6 +24,8 @@ namespace craftersmine.EtherEngine.Content
         /// </summary>
         public TextureLayout TextureLayout { get; private set; }
 
+        public BitmapImage RendererInternalTexture { get; private set; }
+
         /// <summary>
         /// Creates new <see cref="Texture"/> instance with <paramref name="textureImage"/>
         /// </summary>
@@ -29,8 +33,8 @@ namespace craftersmine.EtherEngine.Content
         /// <param name="textureLayout">Sets texture layout</param>
         public Texture(Image textureImage, TextureLayout textureLayout)
         {
-            TextureImage = textureImage;
-            TextureLayout = textureLayout;
+            UpdateTexture(textureImage, textureLayout);
+
         }
 
         /// <summary>
@@ -42,6 +46,7 @@ namespace craftersmine.EtherEngine.Content
         {
             TextureImage = textureImage;
             TextureLayout = textureLayout;
+            RendererInternalTexture = BitmapToImageSource(TextureImage);
         }
 
         /// <summary>
@@ -63,6 +68,22 @@ namespace craftersmine.EtherEngine.Content
             catch (Exception ex)
             {
                 throw new ContentLoadException("Unable to load texture from " + filepath + "! Inner exception message: " + ex.Message, ex);
+            }
+        }
+
+        private BitmapImage BitmapToImageSource(Image bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
             }
         }
     }
