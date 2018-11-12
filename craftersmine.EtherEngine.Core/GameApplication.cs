@@ -17,6 +17,7 @@ namespace craftersmine.EtherEngine.Core
         internal static string TemporaryDirectory { get; private set; }
         internal static ContentStorage InternalResources { get; set; }
         internal static Dictionary<string, Texture> InternalTextures { get; set; } = new Dictionary<string, Texture>();
+        internal static List<Coroutine> RegisteredCoroutines { get; set; } = new List<Coroutine>();
         
         public static Logger Logger { get; private set; }
         public static bool IsExiting { get; internal set; }
@@ -26,7 +27,7 @@ namespace craftersmine.EtherEngine.Core
             try
             {
                 TemporaryDirectory = Environment.GetEnvironmentVariable("temp");
-                SetLogger(new Logger(TemporaryDirectory, "craftersmine_EtherEngine_Game_" + Path.GetFileName(System.Reflection.Assembly.GetExecutingAssembly().Location)));
+                SetLogger(new Logger(TemporaryDirectory, "craftersmine_EtherEngine_Game_" + Path.GetFileName(System.Reflection.Assembly.GetEntryAssembly().Location)));
 
                 Log(LogEntryType.Info, "Initializing game process...");
                 GameWnd = window;
@@ -69,6 +70,13 @@ namespace craftersmine.EtherEngine.Core
         public static void Exit(int exitCode)
         {
             Log(LogEntryType.Info, "Exiting game...");
+            Log(LogEntryType.Info, "Stopping registered coroutines...");
+            if (RegisteredCoroutines.Count > 0)
+                for (int i = 0; i < RegisteredCoroutines.Count; i++)
+                    RegisteredCoroutines[i].StopCoroutine();
+            if (RegisteredCoroutines.Count == 0)
+                Log(LogEntryType.Info, "All coroutines has stopped or no running coroutines exist!");
+            else Log(LogEntryType.Warning, "Some coroutines unable to stop! Skipping...");
             Log(LogEntryType.Info, "Stopping game updater thread...");
             if (Updater != null)
                 Updater.StopUpdater();
