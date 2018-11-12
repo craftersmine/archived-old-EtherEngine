@@ -27,7 +27,7 @@ namespace craftersmine.EtherEngine.Content
         public ContentStorage(string packageName)
         {
             PackageName = packageName;
-            PackageName.Replace('/', Path.DirectorySeparatorChar).Replace('.', Path.DirectorySeparatorChar);
+            PackageName = PackageName.Replace('/', Path.DirectorySeparatorChar).Replace('.', Path.DirectorySeparatorChar);
             CreateContentStorage();
         }
         
