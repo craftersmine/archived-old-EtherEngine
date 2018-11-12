@@ -11,6 +11,7 @@ namespace craftersmine.EtherEngine.Core
         public Texture Texture { get; set; }
         public Animation Animation { get; set; }
         public Transform Transform { get; private set; }
+        public CollisionBox CollisionBox { get; private set; }
 
         internal Image GameObjectBase { get; private set; }
         internal Texture CurrentTexture { get; set; }
@@ -32,6 +33,9 @@ namespace craftersmine.EtherEngine.Core
 
         internal void OnUpdateInternal()
         {
+            GameObjectBase.Width = Transform.Bounds.Width;
+            GameObjectBase.Height = Transform.Bounds.Height;
+            GameObjectBase.Margin = new System.Windows.Thickness(Transform.Position.X, GameObjectBase.Margin.Top, GameObjectBase.Margin.Right, Transform.Position.Y);
             if (IsAnimated)
             {
                 Animation.CountedTicks++;
@@ -50,9 +54,14 @@ namespace craftersmine.EtherEngine.Core
         internal void OnCreatedInternal()
         {
             Transform = new Transform(new System.Drawing.Rectangle(0, 0, 64, 64));
+            CollisionBox = new CollisionBox();
+            CollisionBox.SetCollisionBox(0, 0, Transform.Bounds.Width, Transform.Bounds.Height);
+            Texture = GameApplication.InternalTextures["missingtexture"];
+            CurrentTexture = Texture;
             GameObjectBase = new Image();
             GameObjectBase.Width = Transform.Bounds.Width;
             GameObjectBase.Height = Transform.Bounds.Height;
+            GameObjectBase.Margin = new System.Windows.Thickness(Transform.Position.X, GameObjectBase.Margin.Top, GameObjectBase.Margin.Right, Transform.Position.Y);
             OnCreated();
         }
     }
