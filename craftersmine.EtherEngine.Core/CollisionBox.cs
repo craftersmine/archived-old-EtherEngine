@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace craftersmine.EtherEngine.Core
 {
@@ -15,18 +16,18 @@ namespace craftersmine.EtherEngine.Core
         /// <summary>
         /// Gets collision box offset from object origin by X axis
         /// </summary>
-        public int XOffset { get; internal set; }
-        public int YOffset { get; internal set; }
-        public int Height { get; internal set; }
-        public int Width { get; internal set; }
-        public Rectangle CollisionBoxBoundings { get; internal set; }
+        public double XOffset { get; internal set; }
+        public double YOffset { get; internal set; }
+        public double Height { get; internal set; }
+        public double Width { get; internal set; }
+        public Rect CollisionBoxBoundings { get; internal set; }
 
         public void UpdateCollisionBox(Transform objTransform)
         {
-            CollisionBoxBoundings = new Rectangle((int)objTransform.CameraX + XOffset, (int)objTransform.CameraY + YOffset, Width, Height);
+            CollisionBoxBoundings = new Rect(objTransform.RelativeCameraPosition.X + XOffset, objTransform.RelativeCameraPosition.Y + YOffset, Width, Height);
         }
 
-        public void SetCollisionBox(int xOff, int yOff, int width, int height)
+        public void SetCollisionBox(double xOff, double yOff, double width, double height)
         {
             XOffset = xOff;
             YOffset = yOff;
