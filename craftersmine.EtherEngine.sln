@@ -1,28 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "craftersmine.EtherEngine.Core", "craftersmine.EtherEngine.Core\craftersmine.EtherEngine.Core.csproj", "{EEADD796-85E3-4695-907B-72B1FDE90C58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{3DE4CC04-1DA1-41E3-B666-4DBF326A3867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "craftersmine.EtherEngine.Objects", "craftersmine.EtherEngine.Objects\craftersmine.EtherEngine.Objects.csproj", "{48FA1E38-0E43-4A84-B3CA-32238FF25614}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "craftersmine.EtherEngine.Utils", "craftersmine.EtherEngine.Utils\craftersmine.EtherEngine.Utils.csproj", "{18CD7A59-F7EE-45AD-92DE-8EDDC2114833}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{A44CD534-7C91-4EF6-AC23-A03A84284EA3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "craftersmine.EtherEngine.Content", "craftersmine.EtherEngine.Content\craftersmine.EtherEngine.Content.csproj", "{45E14932-E679-4CF6-9408-73F610BFFEBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "craftersmine.EtherEngine.Core", "craftersmine.EtherEngine.Core\craftersmine.EtherEngine.Core.csproj", "{81396907-D6FF-4940-B28B-C9971102E02C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "craftersmine.EtherEngine.Input", "craftersmine.EtherEngine.Input\craftersmine.EtherEngine.Input.csproj", "{EB866C13-3350-4AAE-BABA-42B69156F57D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Global", "_Global", "{3C72FDEC-795E-42D8-A940-E488AC3ACCA8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Global", "_Global", "{49BA0E69-F705-453D-BAFC-06FC1ACE7946}"
 	ProjectSection(SolutionItems) = preProject
 		_Global\GlobalAssemblyInfo.cs = _Global\GlobalAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{624835AA-B689-460A-BA3B-B270040351A5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApps", "TestApps", "{4AA4450F-50D1-4964-AD52-E561649405CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "craftersmine.EtherEngine.Content", "craftersmine.EtherEngine.Content\craftersmine.EtherEngine.Content.csproj", "{45E14932-E679-4CF6-9408-73F610BFFEBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,43 +22,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EEADD796-85E3-4695-907B-72B1FDE90C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEADD796-85E3-4695-907B-72B1FDE90C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEADD796-85E3-4695-907B-72B1FDE90C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEADD796-85E3-4695-907B-72B1FDE90C58}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48FA1E38-0E43-4A84-B3CA-32238FF25614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48FA1E38-0E43-4A84-B3CA-32238FF25614}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48FA1E38-0E43-4A84-B3CA-32238FF25614}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48FA1E38-0E43-4A84-B3CA-32238FF25614}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18CD7A59-F7EE-45AD-92DE-8EDDC2114833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18CD7A59-F7EE-45AD-92DE-8EDDC2114833}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18CD7A59-F7EE-45AD-92DE-8EDDC2114833}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18CD7A59-F7EE-45AD-92DE-8EDDC2114833}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A44CD534-7C91-4EF6-AC23-A03A84284EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A44CD534-7C91-4EF6-AC23-A03A84284EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A44CD534-7C91-4EF6-AC23-A03A84284EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A44CD534-7C91-4EF6-AC23-A03A84284EA3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE4CC04-1DA1-41E3-B666-4DBF326A3867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE4CC04-1DA1-41E3-B666-4DBF326A3867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE4CC04-1DA1-41E3-B666-4DBF326A3867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE4CC04-1DA1-41E3-B666-4DBF326A3867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81396907-D6FF-4940-B28B-C9971102E02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81396907-D6FF-4940-B28B-C9971102E02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81396907-D6FF-4940-B28B-C9971102E02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81396907-D6FF-4940-B28B-C9971102E02C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB866C13-3350-4AAE-BABA-42B69156F57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB866C13-3350-4AAE-BABA-42B69156F57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB866C13-3350-4AAE-BABA-42B69156F57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB866C13-3350-4AAE-BABA-42B69156F57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E14932-E679-4CF6-9408-73F610BFFEBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EEADD796-85E3-4695-907B-72B1FDE90C58} = {624835AA-B689-460A-BA3B-B270040351A5}
-		{48FA1E38-0E43-4A84-B3CA-32238FF25614} = {624835AA-B689-460A-BA3B-B270040351A5}
-		{18CD7A59-F7EE-45AD-92DE-8EDDC2114833} = {624835AA-B689-460A-BA3B-B270040351A5}
-		{A44CD534-7C91-4EF6-AC23-A03A84284EA3} = {4AA4450F-50D1-4964-AD52-E561649405CA}
-		{45E14932-E679-4CF6-9408-73F610BFFEBE} = {624835AA-B689-460A-BA3B-B270040351A5}
-		{EB866C13-3350-4AAE-BABA-42B69156F57D} = {624835AA-B689-460A-BA3B-B270040351A5}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8D653C5C-5DBA-4A2A-9A2E-9CBD46DC71EC}
+		SolutionGuid = {68EB6951-C12C-4C0A-9437-80EDCEB0C13A}
 	EndGlobalSection
 EndGlobal

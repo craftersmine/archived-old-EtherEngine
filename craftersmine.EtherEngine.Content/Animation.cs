@@ -40,6 +40,8 @@ namespace craftersmine.EtherEngine.Content
         /// </summary>
         public int FrameWidth { get; internal set; }
 
+        public TextureLayout AnimationTextureLayout { get; set; }
+
         /// <summary>
         /// Creates new <see cref="Animation"/> instance
         /// </summary>
@@ -49,6 +51,7 @@ namespace craftersmine.EtherEngine.Content
         /// <param name="frameWidth">Width of <see cref="Animation"/> frame</param>
         public Animation(Texture texture, int frames, int frameTickTrigger, int frameWidth)
         {
+            AnimationTextureLayout = TextureLayout.Default;
             AnimationTexture = texture;
             AnimationFramesCount = frames;
             FrameTickTrigger = frameTickTrigger;
@@ -71,13 +74,13 @@ namespace craftersmine.EtherEngine.Content
         }
 
         /// <summary>
-        /// Gets frame <see cref="Image"/> from frame number
+        /// Gets frame <see cref="Texture"/> from frame number
         /// </summary>
         /// <param name="frameId">Frame number</param>
-        /// <returns>Frame <see cref="Image"/></returns>
-        public Image GetFrame(int frameId)
+        /// <returns>Frame <see cref="Texture"/></returns>
+        public Texture GetFrame(int frameId)
         {
-            return frames[frameId];
+            return new Texture(frames[frameId], AnimationTextureLayout);
         }
 
         /// <summary>

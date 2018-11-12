@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace craftersmine.EtherEngine.Core
 {
+    [Serializable]
     public struct WindowSize
     {
         public int Width { get; }

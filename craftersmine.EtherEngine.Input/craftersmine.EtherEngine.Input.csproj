@@ -31,6 +31,7 @@
     <DocumentationFile>bin\Release\craftersmine.EtherEngine.Input.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
@@ -50,13 +51,8 @@
     </Compile>
     <Compile Include="Gamepad.cs" />
     <Compile Include="Keyboard.cs" />
+    <Compile Include="Mouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\craftersmine.EtherEngine.Utils\craftersmine.EtherEngine.Utils.csproj">
-      <Project>{18cd7a59-f7ee-45ad-92de-8eddc2114833}</Project>
-      <Name>craftersmine.EtherEngine.Utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

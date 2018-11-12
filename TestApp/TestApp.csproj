@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A44CD534-7C91-4EF6-AC23-A03A84284EA3}</ProjectGuid>
+    <ProjectGuid>{3DE4CC04-1DA1-41E3-B666-4DBF326A3867}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>TestApp</RootNamespace>
     <AssemblyName>TestApp</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,7 +36,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -71,28 +71,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\craftersmine.EtherEngine.Content\craftersmine.EtherEngine.Content.csproj">
-      <Project>{45E14932-E679-4CF6-9408-73F610BFFEBE}</Project>
-      <Name>craftersmine.EtherEngine.Content</Name>
-    </ProjectReference>
     <ProjectReference Include="..\craftersmine.EtherEngine.Core\craftersmine.EtherEngine.Core.csproj">
-      <Project>{eeadd796-85e3-4695-907b-72b1fde90c58}</Project>
+      <Project>{81396907-d6ff-4940-b28b-c9971102e02c}</Project>
       <Name>craftersmine.EtherEngine.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\craftersmine.EtherEngine.Input\craftersmine.EtherEngine.Input.csproj">
-      <Project>{EB866C13-3350-4AAE-BABA-42B69156F57D}</Project>
+      <Project>{eb866c13-3350-4aae-baba-42b69156f57d}</Project>
       <Name>craftersmine.EtherEngine.Input</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\craftersmine.EtherEngine.Objects\craftersmine.EtherEngine.Objects.csproj">
-      <Project>{48fa1e38-0e43-4a84-b3ca-32238ff25614}</Project>
-      <Name>craftersmine.EtherEngine.Objects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\craftersmine.EtherEngine.Utils\craftersmine.EtherEngine.Utils.csproj">
-      <Project>{18cd7a59-f7ee-45ad-92de-8eddc2114833}</Project>
-      <Name>craftersmine.EtherEngine.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
