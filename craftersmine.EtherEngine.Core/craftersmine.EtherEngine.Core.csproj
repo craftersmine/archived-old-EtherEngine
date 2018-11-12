@@ -75,6 +75,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer.cs" />
+    <Compile Include="RendererException.cs" />
     <Compile Include="Scene%241.cs" />
     <Compile Include="Scene%242.cs" />
     <Compile Include="Transform.cs" />
