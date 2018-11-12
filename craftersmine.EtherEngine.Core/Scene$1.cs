@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace craftersmine.EtherEngine.Core
 {
@@ -12,6 +14,7 @@ namespace craftersmine.EtherEngine.Core
         internal List<Coroutine> Coroutines { get; set; } = new List<Coroutine>();
 
         public Viewport Viewport { get; set; }
+        public Color BackgroundColor { get; set; } = Colors.Black;
 
         public Scene()
         {
@@ -21,11 +24,13 @@ namespace craftersmine.EtherEngine.Core
         public void AddGameObject(int index, GameObject gameObject)
         {
             GameObjects.Insert(index, gameObject);
+            gameObject.OnCreatedInternal();
         }
 
         public void AddGameObject(GameObject gameObject)
         {
             GameObjects.Add(gameObject);
+            gameObject.OnCreatedInternal();
         }
 
         public void RemoveGameObject(GameObject gameObject)
