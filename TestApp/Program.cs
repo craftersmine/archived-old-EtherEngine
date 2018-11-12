@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 using craftersmine.EtherEngine.Core;
 using craftersmine.EtherEngine.Input;
+using craftersmine.GameEngine.Input;
 
 namespace TestApp
 {
@@ -48,8 +50,22 @@ namespace TestApp
 
         public override void OnShown()
         {
-            coroutine = new Coroutine(new CoroutineCallback(() => { Console.WriteLine("Coroutine is up!"); }));
+            BackgroundColor = Colors.LightSkyBlue;
+            //coroutine = new Coroutine(new CoroutineCallback(() => { Console.WriteLine("Coroutine is up!"); }));
             //RegisterCoroutine(coroutine);
+            GO testGO = new GO();
+            AddGameObject(testGO);
+        }
+    }
+
+    public class GO : GameObject
+    {
+        int i = 0;
+        public override void OnUpdate()
+        {
+            if (Keyboard.IsKeyDown(Keys.W))
+                i++;
+            this.Transform.Position = new Vector2(0, i);
         }
     }
 }
