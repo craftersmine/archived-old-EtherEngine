@@ -35,13 +35,13 @@ namespace craftersmine.EtherEngine.Core
         {
             if (GameApplication.GameWnd.CurrentScene != null)
             {
-                if (GameApplication.GameWnd.CurrentScene.Coroutines.Any())
+                if (GameApplication.GameWnd.CurrentScene.Coroutines.Count > 0)
                 {
                     for (int coroutineIndex = 0; coroutineIndex < GameApplication.GameWnd.CurrentScene.Coroutines.Count; coroutineIndex++)
                         GameApplication.GameWnd.CurrentScene.Coroutines[coroutineIndex].OnUpdateCall();
                 }
                 GameApplication.GameWnd.CurrentScene.OnSceneUpdateInternal();
-                if (GameApplication.GameWnd.CurrentScene.GameObjects.Any())
+                if (GameApplication.GameWnd.CurrentScene.GameObjects.Count > 0)
                 {
                     for (int gameObjectIndex = 0; gameObjectIndex < GameApplication.GameWnd.CurrentScene.GameObjects.Count; gameObjectIndex++)
                         GameApplication.GameWnd.CurrentScene.GameObjects[gameObjectIndex].OnUpdateInternal();
