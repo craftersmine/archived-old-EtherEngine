@@ -3,4 +3,6 @@ solution: craftersmine.EtherEngine.sln
 mono:
   - latest
 script:
+  - sudo apt-get install rpl
+  - rpl "{build_number}" $TRAVIS_BUILD_NUMBER "./_Global/GlobalAssemblyInfo.cs"
   - msbuild craftersmine.EtherEngine.sln /p:Configuration=Release
