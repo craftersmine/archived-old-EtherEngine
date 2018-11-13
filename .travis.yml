@@ -1,0 +1,6 @@
+language: csharp
+solution: craftersmine.EtherEngine.sln
+mono:
+  - latest
+script:
+  - msbuild craftersmine.EtherEngine.sln /p:Configuration=Release
